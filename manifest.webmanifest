@@ -1,0 +1,18 @@
+{
+  "name": "Project Engineering · Aula interactiva",
+  "short_name": "Project Eng.",
+  "description": "Interactive Project Engineering lecture environment by Dr. Gorka Zubia Garea.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6f9",
+  "theme_color": "#004b87",
+  "icons": [
+    {
+      "src": "./assets/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
