@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#004b87">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Project Eng.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <title>Project Engineering · Aula interactiva</title>
+  <style>
+    html,body,iframe{width:100%;height:100%;margin:0;border:0}
+    body{overflow:hidden;background:#f3f6f9}
+    iframe{display:block}
+  </style>
+</head>
+<body>
+  <iframe src="./aula_interactiva.html" title="Project Engineering · Aula interactiva" allow="fullscreen"></iframe>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
+    }
+  </script>
+</body>
+</html>
