@@ -22,7 +22,7 @@ Current catalog:
 
 - Lecture 01 · Dirección de Proyectos — lectures/01-direccion-de-proyectos.html
 
-The original aula_interactiva.html remains in the repository as a backward-compatible standalone copy of Lecture 01.
+The old aula_interactiva.html URL is a small compatibility redirect to the canonical Lecture 01 file. JavaScript preserves query strings and slide fragments; a no-JavaScript redirect and link are also provided. It always opens Lecture 01, independently of the latest lecture.
 
 To publish a new lecture:
 
@@ -42,7 +42,7 @@ No student needs to replace the Home Screen icon or learn a new course URL.
 - manifest.webmanifest — installable PWA metadata and shortcuts.
 - service-worker.js — update-aware offline cache.
 - assets/ — SVG and PNG app icons.
-- aula_interactiva.html — backward-compatible standalone copy of Lecture 01.
+- aula_interactiva.html — small backward-compatible redirect to Lecture 01.
 - scripts/serve.command — macOS local-server launcher.
 
 ## iPhone and iPad
@@ -60,3 +60,17 @@ Double-click scripts/serve.command, or run Python's built-in HTTP server from th
 ## GitHub Pages
 
 GitHub Pages publishes the main branch using the repository's built-in Pages deployment. A separate custom Pages workflow is not required.
+
+## Compatibility and regression checks
+
+Run `node --test scripts/compatibility.test.cjs` before publishing. GitHub Actions also runs this check on pushes and pull requests. Keep compatibility pages below 2 KiB; never copy lecture payloads outside `lectures/`.
+
+The service worker redirects the legacy URL to the canonical lecture even offline and removes previously cached legacy copies without clearing canonical lecture downloads. Offline use requires a prior online visit through the app with its service worker active; a first-ever offline visit cannot download a lecture.
+
+Browser acceptance checks (also under the GitHub Pages `/project-engineering-interactive/` path):
+
+1. Open the root app, open the lecture menu, select Lecture 01, and test Latest and Continue.
+2. Open `aula_interactiva.html?example=1#slide-2`; verify the canonical Lecture 01 URL retains the query and fragment, and Back does not loop through the redirect.
+3. Disable JavaScript and open the old URL; confirm it still reaches Lecture 01 or offers the direct link.
+4. With the service worker controlling the app, open Lecture 01 online, then go offline. Reload the root app and the old bookmark; both must display the cached lecture.
+5. Update an existing installation: canonical downloaded lectures must remain cached, and cached `aula_interactiva.html` copies must be removed.

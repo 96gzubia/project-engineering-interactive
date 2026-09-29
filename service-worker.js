@@ -1,4 +1,7 @@
 const CACHE = 'project-engineering-v3';
+// Keep the cache version: existing downloaded lectures must survive this update.
+const LEGACY = new URL('./aula_interactiva.html', self.location.href);
+const LECTURE_ONE = new URL('./lectures/01-direccion-de-proyectos.html', self.location.href);
 const SHELL = [
   './',
   './index.html',
@@ -19,7 +22,14 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))
+    caches.open(CACHE).then(async cache => {
+      // Remove previously cached standalone copies, including query variants.
+      for (const request of await cache.keys()) {
+        if (new URL(request.url).pathname === LEGACY.pathname) await cache.delete(request);
+      }
+      const keys = await caches.keys();
+      await Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)));
+    })
   );
   self.clients.claim();
 });
@@ -58,6 +68,14 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
+  // Resolve old bookmarks even offline, without caching a second lecture payload.
+  if (url.pathname === LEGACY.pathname) {
+    const target = new URL(LECTURE_ONE);
+    target.search = url.search;
+    event.respondWith(Response.redirect(target.href, 302));
+    return;
+  }
 
   const isDocument = request.mode === 'navigate' || request.destination === 'document';
   const isAppCode = ['script', 'style', 'manifest'].includes(request.destination) || url.pathname.endsWith('/data/lectures.json');

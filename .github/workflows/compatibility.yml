@@ -1,0 +1,19 @@
+name: Compatibility regression
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/compatibility.test.cjs
+      - run: npm install --no-save --package-lock=false playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Browser smoke checks under the Pages subpath
+        run: |
+          python3 -m http.server 8000 --directory .. >/tmp/lecture-server.log 2>&1 &
+          node scripts/browser-smoke.cjs
