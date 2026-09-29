@@ -1,5 +1,13 @@
 {
-  "source": "./aula_interactiva.html",
+  "latest": "pm-mii-01",
   "default": "smart-latest",
-  "lectures": []
+  "lectures": [
+    {
+      "id": "pm-mii-01",
+      "number": 1,
+      "title": "Lecture 01 · Dirección de Proyectos",
+      "course": "Project Management · M.Sc. Industrial Engineering · EHU",
+      "file": "./lectures/01-direccion-de-proyectos.html"
+    }
+  ]
 }
