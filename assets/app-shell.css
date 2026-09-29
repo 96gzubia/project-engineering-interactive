@@ -154,7 +154,9 @@ button { font: inherit; }
 }
 .lecture-option:hover { background: rgba(100,116,139,.09); }
 .lecture-option[aria-selected="true"] { background: rgba(0,75,135,.11); }
+.lecture-option-copy { min-width: 0; display: grid; gap: 3px; }
 .lecture-option-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 650; }
+.lecture-option-meta { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--pe-muted); font-size: 11px; line-height: 1.25; }
 .lecture-option-badge {
   color: var(--pe-blue);
   font-size: 10px;
@@ -162,7 +164,6 @@ button { font: inherit; }
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.lecture-empty { padding: 18px 12px 22px; color: var(--pe-muted); font-size: 13px; line-height: 1.45; }
 
 .lecture-menu-footer {
   padding: 10px 14px 12px;
@@ -184,7 +185,7 @@ button { font: inherit; }
     left: var(--safe-left);
     width: auto;
   }
-  .lecture-toggle { min-width: 0; max-width: min(290px, 82vw); }
+  .lecture-toggle { min-width: 0; max-width: min(310px, 86vw); }
   .lecture-menu {
     position: fixed;
     left: var(--safe-left);
