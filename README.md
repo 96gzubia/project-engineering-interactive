@@ -66,7 +66,7 @@ The service worker redirects the legacy URL to the canonical lecture even offlin
 Browser acceptance checks (also under the GitHub Pages `/project-engineering-interactive/` path):
 
 1. Open the root app, open the lecture menu, select Lecture 01, and test Latest and Continue.
-2. Open `aula_interactiva.html?example=1#slide-2`; verify the canonical Lecture 01 URL retains the query and fragment, and Back does not loop through the redirect.
+2. Open `aula_interactiva.html?example=1#N02`; verify the canonical Lecture 01 URL retains the query and fragment, and Back does not loop through the redirect.
 3. Disable JavaScript and open the old URL; confirm it still reaches Lecture 01 or offers the direct link.
 4. With the service worker controlling the app, open Lecture 01 online, then go offline. Reload the root app and the old bookmark; both must display the cached lecture.
 5. Update an existing installation: canonical downloaded lectures must remain cached, and cached `aula_interactiva.html` copies must be removed.

@@ -12,11 +12,11 @@ await page.click('#lecture-toggle'); await page.click(selector);
 assert.ok(await page.locator('#lecture-frame').getAttribute('src').then(x=>x.includes('lectures/01-')));
 }
 await page.waitForFunction(async()=>{const c=await caches.open('project-engineering-v3');return !!await c.match('./lectures/01-direccion-de-proyectos.html')});
-await page.goto(base+'aula_interactiva.html?example=1#slide-2'); await page.waitForURL('**/lectures/01-direccion-de-proyectos.html?example=1#slide-2');
+await page.goto(base+'aula_interactiva.html?example=1#N02'); console.log('Online bookmark:', page.url()); await page.waitForURL('**/lectures/01-direccion-de-proyectos.html?example=1#N02');
 assert.ok((await page.locator('body').innerText()).length>100);
 await context.setOffline(true);
 await page.goto(base); await page.waitForFunction(()=>document.querySelector('#current-lecture').textContent.includes('Lecture 01'));
-await page.goto(base+'aula_interactiva.html?offline=1#slide-2'); await page.waitForURL('**/lectures/01-direccion-de-proyectos.html?offline=1#slide-2');
+await page.goto(base+'aula_interactiva.html?offline=1#N02'); console.log('Offline bookmark:', page.url()); await page.waitForURL('**/lectures/01-direccion-de-proyectos.html?offline=1#N02');
 assert.ok((await page.locator('body').innerText()).length>100);
 const nojs=await browser.newContext({javaScriptEnabled:false});const p=await nojs.newPage();
 await p.goto(base+'aula_interactiva.html');await p.waitForURL('**/lectures/01-direccion-de-proyectos.html');
