@@ -28,7 +28,7 @@
         number: 1,
         title: 'Lecture 01 · Dirección de Proyectos',
         course: 'Project Management · M.Sc. Industrial Engineering · EHU',
-        file: './aula_interactiva.html'
+        file: './lectures/01-direccion-de-proyectos.html'
       }
     ]
   };
