@@ -20,9 +20,9 @@
   };
 
   const lectureWord = '(?:lecture|lesson|class|session|topic|tema|lecci[oó]n|clase|sesi[oó]n|gaia|saioa|ikasgaia)';
-  const explicitLecturePattern = new RegExp('\b' + lectureWord + '\s*(?:no\.?|n[ºo]\.?|#)?\s*(\d{1,3})\b', 'i');
-  const idLecturePattern = new RegExp(lectureWord + '[-_\s]*(\d{1,3})', 'i');
-  const leadingNumberPattern = /^s*(d{1,2})s*[.):-]s*(S.{2,})$/;
+  const explicitLecturePattern = new RegExp('\\b' + lectureWord + '\\s*(?:no\\.?|n[ºo]\\.?|#)?\\s*(\\d{1,3})\\b', 'i');
+  const idLecturePattern = new RegExp(lectureWord + '[-_\\s]*(\\d{1,3})', 'i');
+  const leadingNumberPattern = /^\s*(\d{1,2})\s*[.):-]\s*(\S.{2,})$/;
 
   let config = { source: './aula_interactiva.html', default: 'smart-latest', lectures: [] };
   let lectures = [];
@@ -31,7 +31,7 @@
   let lastVisitedKey = localStorage.getItem(STORAGE.lastVisited);
   let initialized = false;
 
-  const normalizeText = value => (value || '').replace(/s+/g, ' ').trim();
+  const normalizeText = value => (value || '').replace(/\s+/g, ' ').trim();
   const numeric = value => {
     const n = Number.parseInt(value, 10);
     return Number.isFinite(n) ? n : null;
