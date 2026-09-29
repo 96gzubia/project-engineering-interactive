@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -7,21 +7,57 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Project Eng.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Project Engineering">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-  <title>Project Engineering · Aula interactiva</title>
-  <style>
-    html,body,iframe{width:100%;height:100%;margin:0;border:0}
-    body{overflow:hidden;background:#f3f6f9}
-    iframe{display:block}
-  </style>
+  <link rel="apple-touch-icon" href="./assets/app-icon-192.png">
+  <link rel="stylesheet" href="./assets/app-shell.css">
+  <title>Project Engineering · Interactive Lecture</title>
 </head>
 <body>
-  <iframe src="./aula_interactiva.html" title="Project Engineering · Aula interactiva" allow="fullscreen"></iframe>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
-    }
-  </script>
+  <main class="app-stage" aria-label="Project Engineering interactive lecture">
+    <iframe
+      id="lecture-frame"
+      src="./aula_interactiva.html"
+      title="Project Engineering · Interactive Lecture"
+      allow="fullscreen"
+      referrerpolicy="same-origin"></iframe>
+  </main>
+
+  <div id="lecture-shell" class="lecture-shell is-loading">
+    <button id="lecture-toggle" class="lecture-toggle" type="button" aria-expanded="false" aria-controls="lecture-menu">
+      <span class="lecture-toggle-copy">
+        <span class="lecture-kicker">PROJECT ENGINEERING</span>
+        <span id="current-lecture" class="lecture-current">Opening latest lecture…</span>
+      </span>
+      <span class="lecture-chevron" aria-hidden="true">⌄</span>
+    </button>
+
+    <section id="lecture-menu" class="lecture-menu" aria-label="Lecture navigator" hidden>
+      <header class="lecture-menu-header">
+        <div>
+          <span class="lecture-menu-kicker">COURSE NAVIGATOR</span>
+          <h1>Lectures</h1>
+        </div>
+        <button id="lecture-close" class="icon-button" type="button" aria-label="Close lecture navigator">×</button>
+      </header>
+
+      <div class="lecture-actions" role="group" aria-label="Lecture shortcuts">
+        <button id="latest-lecture" type="button">Latest</button>
+        <button id="continue-lecture" type="button">Continue</button>
+      </div>
+
+      <div id="lecture-list" class="lecture-list" role="listbox" aria-label="Available lectures"></div>
+
+      <footer class="lecture-menu-footer">
+        <span id="lecture-status" aria-live="polite">Discovering lectures…</span>
+        <button id="reload-app" class="text-button" type="button">Check for update</button>
+      </footer>
+    </section>
+  </div>
+
+  <div id="menu-backdrop" class="menu-backdrop" hidden></div>
+  <script src="./scripts/app-shell.js" defer></script>
 </body>
 </html>
