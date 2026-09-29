@@ -24,11 +24,7 @@ Current catalog:
 
 The old aula_interactiva.html URL is a small compatibility redirect to the canonical Lecture 01 file. JavaScript preserves query strings and slide fragments; a no-JavaScript redirect and link are also provided. It always opens Lecture 01, independently of the latest lecture.
 
-To publish a new lecture:
-
-1. Add the new standalone HTML file under lectures.
-2. Add one entry to data/lectures.json with its id, number, title, course, and file path.
-3. Change the top-level latest value to the new lecture id.
+To publish from Lecture Studio, use **Prepare publishing handoff**, then follow [PUBLISHING.md](PUBLISHING.md). Validation previews the filename and metadata without writing. Only `--publish` commits a lecture, and only `--make-latest` changes `latest`. Exporting never publishes.
 
 No student needs to replace the Home Screen icon or learn a new course URL.
 
